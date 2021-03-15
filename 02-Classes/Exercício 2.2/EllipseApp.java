@@ -64,6 +64,6 @@ class Ellipse {
         g2d.fill(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
 
         g2d.setColor(this.outline);
-        g2d.draw(new Ellipse2D.Double(this.x, this.y, this.w, this. h));
+        g2d.draw(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
     }
 }
