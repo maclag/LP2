@@ -8,7 +8,7 @@ public class Pentagon {
     private Color background;
     private Color outline;
 
-    public Pentagon(int[] x, int[] y, int n, Color background, Color outline) {
+    public Pentagon (int[] x, int[] y, int n, Color background, Color outline) {
         this.x = x;
         this.y = y;
         this.n = n;
