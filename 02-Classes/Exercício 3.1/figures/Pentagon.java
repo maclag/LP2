@@ -6,7 +6,7 @@ public class Pentagon {
     private int[] x, y;
     private int n;
 
-    public Pentagon(int[] x, int[] y, int n) {
+    public Pentagon (int[] x, int[] y, int n) {
         this.x = x;
         this.y = y;
         this.n = n;
