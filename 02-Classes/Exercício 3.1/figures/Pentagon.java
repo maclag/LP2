@@ -21,6 +21,5 @@ public class Pentagon {
         Polygon PentagonObject = new Polygon(this.x, this.y, 5);
 
         g2d.drawPolygon(PentagonObject);
-
     }
 }
