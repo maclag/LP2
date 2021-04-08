@@ -5,12 +5,7 @@ import java.awt.*;
 public class Triangle extends Figure {
 
     public Triangle (int x, int y, int w, int h, Color background, Color outline) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.background = background;
-        this.outline = outline;
+        super(x, y, w, h, background, outline);
     }
 
     public void print () {
