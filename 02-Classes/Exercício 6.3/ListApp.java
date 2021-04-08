@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import figures.*;
 
@@ -14,9 +13,9 @@ class ListApp {
 }
 
 class ListFrame extends JFrame {
-	private static final long serialVersionUID = 1L;
-	
-	ArrayList<Figure> figs = new ArrayList<Figure>();
+    private static final long serialVersionUID = 1L;
+    
+    ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
 
     ListFrame () {
