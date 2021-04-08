@@ -44,7 +44,7 @@ class ListFrame extends JFrame {
                         }
 
                         else if (evt.getKeyChar() == 't') {
-                            figs.add(new Triangle(new int[]{x, x-w, x+w}, new int[]{y, y+h, y+h}, Color.pink, Color.blue));
+                            figs.add(new Triangle(x, y, w, h, Color.pink, Color.blue));
                         }
 
                         repaint();
