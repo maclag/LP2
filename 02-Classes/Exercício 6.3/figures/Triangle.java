@@ -3,24 +3,28 @@ package figures;
 import java.awt.*;
 
 public class Triangle extends Figure {
-    int[] xp, yp;
 
-    public Triangle (int[] xp, int[] yp, Color background, Color outline) {
-        this.xp = xp;
-        this.yp = yp;
+    public Triangle (int x, int y, int w, int h, Color background, Color outline) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
         this.background = background;
         this.outline = outline;
     }
 
     public void print () {
-        System.out.printf("Triângulo de vértices em (%d, %d), (%d, %d) e (%d, %d).\n",
-                xp[0], yp[0], xp[1], yp[1], xp[2], yp[2]);
+        System.out.printf("Triangulo de tamanho (%d,%d) na posicao (%d, %d).\n",
+                this.w, this.h, this.x, this.y);
     }
 
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        Polygon TriangleObject = new Polygon(this.xp, this.yp, 3);
+        int[] xp = new int[]{x, x - w, x + w};
+        int[] yp = new int[]{y, y + h, y + h};
+
+        Polygon TriangleObject = new Polygon(xp, yp, 3);
 
         g2d.setColor(this.background);
         g2d.fillPolygon(TriangleObject);
