@@ -7,12 +7,7 @@ import java.awt.geom.Ellipse2D.Double;
 public class Ellipse extends Figure {
 
     public Ellipse (int x, int y, int w, int h, Color background, Color outline) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.background = background;
-        this.outline = outline;
+        super(x, y, w, h, background, outline);
     }
 
     public void print () {
