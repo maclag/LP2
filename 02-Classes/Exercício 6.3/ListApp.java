@@ -14,7 +14,9 @@ class ListApp {
 }
 
 class ListFrame extends JFrame {
-    ArrayList<Figure> figs = new ArrayList<Figure>();
+	private static final long serialVersionUID = 1L;
+	
+	ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
 
     ListFrame () {
