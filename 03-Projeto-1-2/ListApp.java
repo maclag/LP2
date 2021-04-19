@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 import figures.*;
 
@@ -16,8 +15,9 @@ class ListApp {
 class ListFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
-    ArrayList<Figure> figs = new ArrayList<Figure>();
-    Random rand = new Random();
+    ArrayList<Figure> figs = new ArrayList<>();
+    Figure focus = null;
+    Point p = getMousePosition();
 
     ListFrame () {
         this.addWindowListener (
@@ -31,10 +31,10 @@ class ListFrame extends JFrame {
         this.addKeyListener (
                 new KeyAdapter() {
                     public void keyPressed (KeyEvent evt) {
-                        int x = rand.nextInt(350);
-                        int y = rand.nextInt(350);
-                        int w = rand.nextInt(50);
-                        int h = rand.nextInt(50);
+                        int x = (int) p.getX();
+                        int y = (int) p.getY();
+                        int w = 50;
+                        int h = 50;
 
                         if (evt.getKeyChar() == 'r') {
                             Rect r = new Rect(x, y, w, h, Color.yellow, Color.black);
@@ -57,6 +57,30 @@ class ListFrame extends JFrame {
                     }
                 }
         );
+
+        this.addMouseListener (
+                new MouseAdapter() {
+                    public void mousePressed (MouseEvent evt) { /*Figura em foco*/
+                        focus = null;
+                        for (Figure fig: figs) {
+                            /*
+                            if (fig.x vs evt.getX() && fig.y vs evt.getY()) {
+                                focus = fig;
+                            }
+                            */
+                        }
+                    }
+            }
+        );
+
+        this.addMouseMotionListener(
+                new MouseMotionAdapter () {
+                    public void mouseDragged (MouseEvent evt) {
+
+                    }
+                }
+        );
+
 
         this.setTitle("Lista de Figuras");
         this.setSize(350, 350);
