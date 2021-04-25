@@ -1,4 +1,4 @@
-# Criação de figuras
+## Criação de figuras
 - 'r': cria um retângulo
 - 'e': cria uma elipse
 - 't': cria um triângulo
