@@ -3,17 +3,18 @@ package figures;
 import java.awt.*;
 
 public class Triangle extends Figure {
-    Polygon triangle;
 
     public Triangle (int x, int y, int w, int h, Color background, Color outline) {
         super(x, y, w, h, background, outline);
     }
 
+    @Override
     public void print () {
         System.out.printf("Triangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
                 this.w, this.h, this.x, this.y);
     }
 
+    @Override
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 

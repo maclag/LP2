@@ -9,11 +9,13 @@ public class Ellipse extends Figure {
         super(x, y, w, h, background, outline);
     }
 
+    @Override
     public void print () {
         System.out.printf("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",
                 this.w, this.h, this.x, this.y);
     }
 
+    @Override
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
