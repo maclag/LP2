@@ -33,6 +33,4 @@ public abstract class Figure implements IVisible {
         this.w += rw;
         this.h += rh;
     }
-
-
 }
