@@ -40,8 +40,7 @@ class ListFrame extends JFrame {
 
                         focus = null;
                         for (Figure fig: figs) {
-                            boolean insideFigure = fig.x <= x && x <= (fig.x + fig.h) && fig.y <= y && y <= (fig.y + fig.w);
-                            if (insideFigure) {
+                            if (fig.clicked(x,y)) {
                                 focus = fig;
                             }
                         }
@@ -140,7 +139,7 @@ class ListFrame extends JFrame {
 
                         // Changing focus
                         else if (key == 10) { // ENTER = change focus
-                            if (focus == null) {
+                            if (focus == null && !figs.isEmpty()) {
                                 focus = figs.get(0);
                             }
 
@@ -223,7 +222,7 @@ class ListFrame extends JFrame {
                 }
         );
 
-        this.setTitle("Projeto 1/2 - Editor Grafico Vetorial");
+        this.setTitle("Projeto - Editor Grafico Vetorial");
         this.setSize(600, 450);
         setLocationRelativeTo(null);
     }
