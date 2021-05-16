@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 
 import figures.*;
@@ -23,9 +24,26 @@ class ListFrame extends JFrame {
     int iFilled = 1, jBorder = 0;
 
     ListFrame () {
+        try {
+            FileInputStream f = new FileInputStream("proj.bin");
+            ObjectInputStream o = new ObjectInputStream(f);
+            this.figs = (ArrayList<Figure>) o.readObject();
+            o.close();
+        } catch (Exception x) {
+            System.out.println("ERRO!");
+        }
+
         this.addWindowListener (
                 new WindowAdapter() {
                     public void windowClosing (WindowEvent e) {
+                        try {
+                            FileOutputStream f = new FileOutputStream("proj.bin");
+                            ObjectOutputStream o = new ObjectOutputStream(f);
+                            o.writeObject(figs);
+                            o.flush();
+                            o.close();
+                        } catch (Exception x) {
+                        }
                         System.exit(0);
                     }
                 }
