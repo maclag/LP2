@@ -15,7 +15,7 @@ public class Pentagon extends Figure {
     }
 
     @Override
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
         int[] xp = new int[]{x + w/2, x + w,  x + (75*w)/100, x + w/4, x};
@@ -31,4 +31,5 @@ public class Pentagon extends Figure {
         g2d.setColor(this.outline);
         g2d.drawPolygon(PentagonObject);
     }
+
 }

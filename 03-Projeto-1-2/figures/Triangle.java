@@ -15,7 +15,7 @@ public class Triangle extends Figure {
     }
 
     @Override
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
         int[] xt = new int[]{x + w/2, x + w, x};
@@ -31,4 +31,5 @@ public class Triangle extends Figure {
         g2d.setColor(this.outline);
         g2d.drawPolygon(TriangleObject);
     }
+
 }
