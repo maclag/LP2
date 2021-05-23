@@ -11,6 +11,9 @@ class ListFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
     ArrayList<Figure> figs = new ArrayList<>();
+    ArrayList<Button> buts = new ArrayList<>();
+
+    Button focus_but = null;
     Figure focus = null;
     Rect rectFocus = null;
     Rect rectResize = new Rect(0, 0, 15, 15, null, Color.red);
@@ -48,6 +51,8 @@ class ListFrame extends JFrame {
                     }
                 }
         );
+
+        buts.add(new Button(0, new Rect(0, 0, 0, 0, null, null)));
 
         this.addMouseListener(
                 new MouseAdapter() {
@@ -248,7 +253,7 @@ class ListFrame extends JFrame {
     public void paint (Graphics g) {
         super.paint(g);
         for (Figure fig: this.figs) {
-            fig.paint(g);
+            fig.paint(g, true);
         }
 
         if (focus != null) {
@@ -257,7 +262,7 @@ class ListFrame extends JFrame {
             if (pressedRes) {
                 rectResize.x = rectFocus.x + rectFocus.w - 15;
                 rectResize.y = rectFocus.y + rectFocus.h - 15;
-                rectResize.paint(g);
+                rectResize.paint(g, true);
             }
         }
     }
