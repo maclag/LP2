@@ -15,6 +15,11 @@ public class Rect extends Figure {
     }
 
     @Override
+    public boolean clicked (int x, int y) {
+        return this.x <= x && x <= (this.x + this.h) && this.y <= y && y <= (this.y + this.w);
+    }
+
+    @Override
     public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
@@ -25,6 +30,12 @@ public class Rect extends Figure {
 
         g2d.setColor(this.outline);
         g2d.drawRect(this.x, this.y, this.w, this.h);
+
+        if (focused) {
+            g2d.setStroke(new BasicStroke(1));
+            g2d.setColor(Color.red);
+            g2d.drawRect(this.x-2, this.y-2, this.w+4, this.h+4);
+        }
     }
 
     public void redFocus (Graphics g) {
@@ -35,4 +46,5 @@ public class Rect extends Figure {
         g2d.setColor(Color.red);
         g2d.drawRect(this.x, this.y, this.w, this.h);
     }
+
 }

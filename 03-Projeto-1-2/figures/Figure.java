@@ -21,10 +21,6 @@ public abstract class Figure implements IVisible, Serializable {
 
     public abstract void print ();
 
-    public boolean clicked (int x, int y) {
-        return this.x <= x && x <= (this.x + this.h) && this.y <= y && y <= (this.y + this.w);
-    }
-
     public void drag (int dx, int dy) {
         this.x += dx;
         this.y += dy;
