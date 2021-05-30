@@ -6,18 +6,21 @@ import java.util.ArrayList;
 
 import figures.*;
 import colors.*;
+import menus.*;
 
 class ListFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
     ArrayList<Figure> figs = new ArrayList<>();
-    ArrayList<Button> buts = new ArrayList<>();
+    ArrayList<menus.Button> buts = new ArrayList<>();
 
-    Button focus_but = null;
     Figure focus = null;
+    menus.Button focus_but = null;
+
     Rect rectFocus = null;
-    Rect rectResize = new Rect(0, 0, 15, 15, null, Color.red);
+    Rect rectResize = new Rect(0, 0, 15, 15, null, null);
     Point pos = null;
+    int x, y = 0;
 
     boolean pressedRes = false;
 
@@ -52,14 +55,39 @@ class ListFrame extends JFrame {
                 }
         );
 
-        buts.add(new Button(0, new Rect(0, 0, 0, 0, null, null)));
+        buts.add(new menus.Button(0, new Ellipse(25, 55, 35, 35, Color.white, Color.black)));
+        buts.add(new menus.Button(1, new Pentagon(25, 105, 35, 35, Color.white, Color.black)));
+        buts.add(new menus.Button(2, new Rect(25, 155, 35, 35, Color.white, Color.black)));
+        buts.add(new menus.Button(3, new Triangle(25, 205, 35, 35, Color.white, Color.black)));
 
         this.addMouseListener(
                 new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent beforeEvt) {
-                        int x = beforeEvt.getX();
-                        int y = beforeEvt.getY();
+                        x = beforeEvt.getX();
+                        y = beforeEvt.getY();
+
+                        if (focus_but != null && !(x >= 20 && x <= 65 && y >= 50 && y <= 200)) {
+                            if (focus_but.idx == 0) {
+                                figs.add(new Ellipse(x, y, 50, 50, Colors.colors.get(2), Colors.colors.get(3)));
+                            } else if (focus_but.idx == 1) {
+                                figs.add(new Pentagon(x, y, 50, 50, Colors.colors.get(6), Colors.colors.get(7)));
+                            } else if (focus_but.idx == 2) {
+                                figs.add(new Rect(x, y, 50, 50, Colors.colors.get(0), Colors.colors.get(1)));
+                            } else if (focus_but.idx == 3) {
+                                figs.add(new Triangle(x, y, 50, 50, Colors.colors.get(4), Colors.colors.get(5)));
+                            }
+                            focus = figs.get(figs.size() - 1);
+                            focus_but = null;
+                            repaint();
+                            return;
+                        }
+
+                        for (menus.Button but: buts) {
+                            if (but.clicked(x,y)) {
+                                focus_but = but;
+                            }
+                        }
 
                         focus = null;
                         for (Figure fig: figs) {
@@ -137,7 +165,7 @@ class ListFrame extends JFrame {
 
                         int letter = evt.getKeyChar();
                         int key = evt.getKeyCode();
-                        pressedRes = false;
+                        //pressedRes = false;
 
                         // Creating the figures
                         if (letter == 'r') { // 'r' = create a rectangle
@@ -237,7 +265,6 @@ class ListFrame extends JFrame {
                         else if (key == 127 && focus != null) { // DELETE = delete the figure
                             figs.remove(focus);
                             focus = null;
-                            rectFocus = null;
                         }
 
                         repaint();
@@ -246,24 +273,33 @@ class ListFrame extends JFrame {
         );
 
         this.setTitle("Projeto - Editor Grafico Vetorial");
-        this.setSize(600, 450);
+        this.setSize(750, 530);
         setLocationRelativeTo(null);
     }
 
     public void paint (Graphics g) {
         super.paint(g);
+
+        CommandList.Menu(g);
+
         for (Figure fig: this.figs) {
-            fig.paint(g, true);
+            fig.paint(g, false);
         }
 
         if (focus != null) {
-            rectFocus = new Rect(focus.x-5, focus.y-5, focus.w+10, focus.h+10, null, Color.red);
+            focus.paint(g, true);
+            rectFocus = new Rect(focus.x-5, focus.y-5, focus.w+10, focus.h+10, null, null);
             rectFocus.redFocus(g);
             if (pressedRes) {
                 rectResize.x = rectFocus.x + rectFocus.w - 15;
                 rectResize.y = rectFocus.y + rectFocus.h - 15;
-                rectResize.paint(g, true);
+                rectResize.paint(g, false);
             }
+        }
+
+        menus.Button.paintArea(g);
+        for (menus.Button but: this.buts) {
+            but.paint(g, but == focus_but);
         }
     }
 }
